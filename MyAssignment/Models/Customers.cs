@@ -20,7 +20,6 @@ namespace MyAssignment.Models
 
         [Required]
         public string Phone { get; set; }
-
-        
+       
     }
 }

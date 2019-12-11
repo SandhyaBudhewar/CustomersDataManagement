@@ -33,10 +33,7 @@ namespace MyAssignment.Models
             }
         }
 
-        internal Users GetCustomerData(string v)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public bool CheckLogin(Users user)
         {

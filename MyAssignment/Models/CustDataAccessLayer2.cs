@@ -14,10 +14,31 @@ namespace MyAssignment.Models
             customerDBContext = context;
         }
 
-        public void AddCustomers(Customers customer)
+        public bool AddCustomers(Customers customer)
         {
+            if (string.IsNullOrEmpty(customer.CustomerId))
+            {
+                throw new ArgumentNullException(customer.CustomerId);
+            }
+            if (string.IsNullOrEmpty(customer.Name))
+            {
+                throw new ArgumentNullException(customer.Name);
+            }
+            else if (string.IsNullOrEmpty(customer.Address))
+            {
+                throw new ArgumentNullException(customer.Address);
+            }
+            else if (string.IsNullOrEmpty(customer.PaymentCategory))
+            {
+                throw new ArgumentNullException(customer.PaymentCategory);
+            }
+            else if (string.IsNullOrEmpty(customer.Phone))
+            {
+                throw new ArgumentNullException(customer.Phone);
+            }
             customerDBContext.Add(customer);
             customerDBContext.SaveChanges();
+            return true;
         }
 
         public IEnumerable<Customers> Customers()

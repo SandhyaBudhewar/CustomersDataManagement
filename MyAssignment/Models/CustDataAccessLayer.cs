@@ -11,7 +11,7 @@ namespace MyAssignment.Models
     public class CustDataAccessLayer : ICustDataAccessLayer
     {
         string connectionString = "Server=FSIND-LT-6\\SQLEXPRESS;Database=CustomerDB;Trusted_Connection=TRUE;";
-        public void AddCustomers(Customers cust)
+        public bool AddCustomers(Customers cust)
         {
             using SqlConnection con = new SqlConnection(connectionString);
             {
@@ -28,6 +28,7 @@ namespace MyAssignment.Models
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 con.Close();
+                return true;
             }
         }
 
@@ -58,7 +59,7 @@ namespace MyAssignment.Models
 
         public void UpdateCustomers(Customers cust)
         {
-            Debug.WriteLine(cust.CustomerId + cust.Name + cust.Address + cust.PaymentCategory + cust.Phone);
+           // Debug.WriteLine(cust.CustomerId + cust.Name + cust.Address + cust.PaymentCategory + cust.Phone);
             using SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand("spUpdateCustomer", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -102,8 +103,8 @@ namespace MyAssignment.Models
         {
             using SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand("spDeleteCustomer", con);
+            
             cmd.CommandType = CommandType.StoredProcedure;
-
             cmd.Parameters.AddWithValue("@CustomerId", id);
             con.Open();
             cmd.ExecuteNonQuery();
